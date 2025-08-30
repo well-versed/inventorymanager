@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Inventory & Suppliers</h2>
+
+<!-- Add Supplier -->
+<h3>Add Supplier</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Supplier</button>
+</form>
+
+<hr>
+
+<!-- Suppliers List -->
+<h3>Suppliers</h3>
+<ul>
+    {% for supplier in suppliers %}
+    <li>{{ supplier.name }} - {{ supplier.contact }}</li>
+    {% empty %}
+    <li>No suppliers added yet.</li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+<!-- Inventory List -->
+<h3>Product Inventory</h3>
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Stock</th>
+        <th>Price</th>
+    </tr>
+    {% for product in products %}
+    <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.stock }}</td>
+        <td>{{ product.price }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="3">No products in inventory.</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

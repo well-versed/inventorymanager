@@ -1,0 +1,55 @@
+{% extends "inventory/base.html" %}
+
+{% block content %}
+<h2>Start New Sale</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ sale_form.as_p }}
+    {{ formset.management_form }}
+
+    <h3>Products</h3>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Remove?</th>
+        </tr>
+        {% for form in formset %}
+        <tr>
+            <td>{{ form.product }}</td>
+            <td>{{ form.quantity }}</td>
+            <td>{{ form.DELETE }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <button type="submit">Save Sale</button>
+</form>
+
+{% if sale %}
+    <h3>Sale Details</h3>
+    <p><strong>Customer:</strong> {{ sale.customer_name }}</p>
+    <p><strong>Date:</strong> {{ sale.date }}</p>
+
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Subtotal</th>
+        </tr>
+        {% for item in sale.items.all %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.product.price }}</td>
+            <td>{{ item.subtotal }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Total to Pay: {{ total }}</h3>
+{% endif %}
+
+{% endblock %}

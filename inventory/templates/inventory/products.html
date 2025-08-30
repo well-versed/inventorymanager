@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory Manager</title>
+</head>
+<body>
+    <h1>Inventory Products</h1>
+
+    {% if products %}
+        <ul>
+        {% for product in products %}
+            <li>
+                {{ product.name }} - {{ product.quantity }} in stock ({{ product.price }}$)
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No products available.</p>
+    {% endif %}
+</body>
+</html>

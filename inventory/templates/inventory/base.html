@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory Manager</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'home' %}">Home</a> |
+        <a href="{% url 'product_list' %}">Products</a> |
+        <a href="{% url 'customer_list' %}">Customers</a> |
+        <a href="{% url 'supplier_list' %}">Suppliers</a> |
+        <a href="{% url 'start_sale' %}">Sales</a>
+    </nav>
+    <hr>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
